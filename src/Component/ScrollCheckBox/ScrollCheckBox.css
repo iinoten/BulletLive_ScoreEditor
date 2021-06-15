@@ -1,0 +1,22 @@
+.ScrollCheckBox {
+    float: left;
+    width: 80%;
+    display: inline;
+    min-inline-size: max-content;
+
+    margin-top: 8px;
+     margin-right: 18px;
+}
+
+td:nth-child(21) {
+    background-color: rgb(78, 103, 241);
+}
+td:nth-child(5),td:nth-child(36) {
+    background-color: rgb(192, 192, 192);
+}
+td:nth-child(10),td:nth-child(31) {
+    background-color: rgb(192, 192, 192);
+}
+td:nth-child(15),td:nth-child(26) {
+    background-color: rgb(192, 192, 192);
+}

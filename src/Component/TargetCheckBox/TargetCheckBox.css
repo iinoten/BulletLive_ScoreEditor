@@ -1,0 +1,23 @@
+.TargetCheckBox {
+    height: 32px; width: 32px;
+
+    border: 1px #444 solid;
+    border-radius: 8px;
+
+    display: inline-block;
+    margin: 0 4px;
+}
+
+.TargetCheckBox__Point {
+    height: 80%; width: 80%;
+    margin: 5%;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+
+    background-color: #CCC;
+
+    border: 2px solid #444;
+    font-weight: 600;
+    color: #444;
+}
