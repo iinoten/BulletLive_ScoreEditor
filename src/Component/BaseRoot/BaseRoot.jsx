@@ -19,7 +19,7 @@ class BaseRoot extends Component {
         this.setState({ soundScore: [...this.state.soundScore, [0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0]]})
     }
     add_series_beats = () => {
-        this.setState({ soundScore: [...this.state.soundScore, [0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0]]})
+        this.setState({ soundScore: [...this.state.soundScore, [0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0]]})
     }
 
     remove_single_beat = () => {
@@ -89,14 +89,14 @@ class BaseRoot extends Component {
               BPM: <input type="number" value={this.state.BPMValue} onChange={e=>this.onChange_BPM_value(e)}></input>
               <table>
                   { this.state.soundScore.map(( item, index) => (
-                      <ScrollCheckBox time={( 60/this.state.BPMValue )/5 * index} update_score={this.update_score} value={item} indexNumber={index} />
+                      <ScrollCheckBox time={( 60/this.state.BPMValue )/6 * index} update_score={this.update_score} value={item} indexNumber={index} />
                   )) }
               </table>
               <button onClick={this.add_single_beat}>拍の追加</button>
-              <button onClick={this.add_series_beats}>5拍の追加</button>
+              <button onClick={this.add_series_beats}>一連拍の追加</button>
 
               <button onClick={this.remove_single_beat}>末尾拍の追加</button>
-              <button onClick={this.remove_series_beats}>末尾5拍の追加</button>
+              <button onClick={this.remove_series_beats}>末尾一連拍の追加</button>
               <button onClick={this.download_jsonfile}>書き出し</button>
             </div>
         )
