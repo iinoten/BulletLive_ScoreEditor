@@ -121,7 +121,7 @@ class BaseRoot extends Component {
                             "z": columnData.HeightNum * 40,
                         },
                         "NotesType": columnData.time?"Long":"Single",
-				        "LongNotesTime": columnData.time
+				        "LongNotesTime": columnData.time?( columnData.time - (stepIndex * delay_time + parseFloat(this.state.delayTime)) ) : 0
                     })
                 }
             })
@@ -143,10 +143,11 @@ class BaseRoot extends Component {
         link.click();
         document.body.removeChild(link);
     }
-    onChange_BPM_value = e => this.setState({BPMValue: e.target.value})
+    onChange_BPM_value = e => {this.setState({BPMValue: e.target.value})}
     onChange_Title_Value = e => this.setState({titleValue:e.target.value})
     onChange_delayTime_value = e => this.setState({delayTime:e.target.value})
     render() {
+        console.log(this.state.BPMValue)
         return (
             <div className="BaseRoot">
                 <div>

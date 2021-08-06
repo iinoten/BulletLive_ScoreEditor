@@ -1,12 +1,15 @@
 import "./TargetCheckBox.css"
 import React, {Component} from 'react'
+import ReactTooltip from "react-tooltip"
 
 class TargetCheckBox extends Component {
     constructor(props) {
         super(props)
         this.state = {
             heightNumber: props.value,
-            isChecked: Boolean(props.value)
+            isChecked: Boolean(props.value),
+            isLongNotes: false,
+            forTimeLongnotes: 0
         }
     }
     onToggle_Checkbox = val => console.log(val)
@@ -18,6 +21,7 @@ class TargetCheckBox extends Component {
                 let inputTimeParams = window.prompt("何秒までのロングノーツを配置しますか")
                 console.log(inputTimeParams,"までの時間のロングノーツを置く")
                 this.props.update_longnotes(this.props.number,parseFloat(inputTimeParams))
+                this.setState({isLongNotes: true, forTimeLongnotes: inputTimeParams})
             }
         } else {
             this.setState({ isChecked: true })
@@ -38,12 +42,13 @@ class TargetCheckBox extends Component {
     onRightClick_Box = event => {
         event.preventDefault()
         this.props.onChange(this.props.number, 0)
-        this.setState({ isChecked: false })
+        this.setState({ isChecked: false, isLongNotes: false, forTimeLongnotes: 0 })
     }
     render() {
         return (
-            <td onClick={this.onLeftClick_Box} onContextMenu={this.onRightClick_Box} className="TargetCheckBox" >
-                {this.state.isChecked && <div className="TargetCheckBox__Point">{this.state.heightNumber}</div>}
+            <td data-tip={this.state.forTimeLongnotes?(this.state.forTimeLongnotes+" 秒まで"):null} onClick={this.onLeftClick_Box} onContextMenu={this.onRightClick_Box} className="TargetCheckBox" >
+                {this.state.isChecked && <div className="TargetCheckBox__Point" style={{backgroundColor: this.state.isLongNotes?"#daa4a4":"#c0c0c0"}}>{this.state.heightNumber}</div>}
+                {this.state.isLongNotes ? <ReactTooltip effect="float" type="info" place="right" />: null}
             </td>
         )
     }
