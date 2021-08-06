@@ -12,18 +12,26 @@ class TargetCheckBox extends Component {
     onToggle_Checkbox = val => console.log(val)
     onLeftClick_Box = event => {
         const key_event = event || window.event;
-        console.log(key_event.ctrlKey)
-        this.setState({ isChecked: true })
-        if( !this.state.isChecked ) {
-            this.setState({ heightNumber: 5 })
-            this.props.onChange(this.props.number, 5)
+        console.log(key_event.shiftKey)
+        if(key_event.shiftKey) {
+            if(this.state.isChecked) {
+                let inputTimeParams = window.prompt("何秒までのロングノーツを配置しますか")
+                console.log(inputTimeParams,"までの時間のロングノーツを置く")
+                this.props.update_longnotes(this.props.number,parseFloat(inputTimeParams))
+            }
         } else {
-            if(this.state.heightNumber < 9) {
-                this.props.onChange(this.props.number, this.state.heightNumber+1)
-                this.setState ({ heightNumber: this.state.heightNumber+1 })
+            this.setState({ isChecked: true })
+            if( !this.state.isChecked ) {
+                this.setState({ heightNumber: 5 })
+                this.props.onChange(this.props.number, 5)
             } else {
-                this.setState ({ heightNumber: 1 })
-                this.props.onChange(this.props.number, 1)
+                if(this.state.heightNumber < 9) {
+                    this.props.onChange(this.props.number, this.state.heightNumber+1)
+                    this.setState ({ heightNumber: this.state.heightNumber+1 })
+                } else {
+                    this.setState ({ heightNumber: 1 })
+                    this.props.onChange(this.props.number, 1)
+                }
             }
         }
     }

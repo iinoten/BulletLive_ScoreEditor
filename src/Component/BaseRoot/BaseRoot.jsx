@@ -91,7 +91,15 @@ class BaseRoot extends Component {
     update_score = ( stepNumber, placeNumber, heightNumber ) => {
         var convertScore = this.state.soundScore.slice()
         convertScore[stepNumber][placeNumber].HeightNum = heightNumber
-        console.log("updated",convertScore[stepNumber],heightNumber,convertScore[stepNumber][placeNumber].HeightNum)
+        if(!heightNumber) {
+            convertScore[stepNumber][placeNumber].time = 0
+        }
+        this.setState({soundScore: convertScore})
+    }
+
+    update_longnotes = ( stepNumber, placeNumber, longTime ) => {
+        var convertScore = this.state.soundScore.slice()
+        convertScore[stepNumber][placeNumber].time = longTime
         this.setState({soundScore: convertScore})
     }
 
@@ -111,7 +119,9 @@ class BaseRoot extends Component {
                             "x": 700*Math.cos(rad( (19-columnIndex)*-8.8 ) ),
                             "y": 700*Math.sin(rad( (19-columnIndex)*-8.8 ) ),
                             "z": columnData.HeightNum * 40,
-                        }
+                        },
+                        "NotesType": columnData.time?"Long":"Single",
+				        "LongNotesTime": columnData.time
                     })
                 }
             })
@@ -155,7 +165,7 @@ class BaseRoot extends Component {
                 </div>
               <table>
                   { this.state.soundScore.map(( item, index) => (
-                      <ScrollCheckBox time={( (60/this.state.BPMValue )/2 * index) + parseFloat(this.state.delayTime)} update_score={this.update_score} value={item} indexNumber={index} />
+                      <ScrollCheckBox time={( (60/this.state.BPMValue )/2 * index) + parseFloat(this.state.delayTime)} update_longnotes={this.update_longnotes} update_score={this.update_score} value={item} indexNumber={index} />
                   )) }
               </table>
               <button onClick={this.add_single_beat}>拍の追加</button>
