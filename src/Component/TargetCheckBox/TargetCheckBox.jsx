@@ -10,7 +10,9 @@ class TargetCheckBox extends Component {
         }
     }
     onToggle_Checkbox = val => console.log(val)
-    onLeftClick_Box = () => {
+    onLeftClick_Box = event => {
+        const key_event = event || window.event;
+        console.log(key_event.ctrlKey)
         this.setState({ isChecked: true })
         if( !this.state.isChecked ) {
             this.setState({ heightNumber: 5 })
