@@ -164,10 +164,9 @@ class BaseRoot extends Component {
 
             for (let inputFileDataindex = 0; inputFileDataindex < inputNotesData.length; inputFileDataindex++) {
                 const needFixNotesIndex = Math.round((inputNotesData[inputFileDataindex].time - inputData.MarginTime )/(60/this.state.BPMValue/2))
-                console.log(needFixNotesIndex,Math.round( Math.atan(inputNotesData[inputFileDataindex].PopLocation.y/inputNotesData[inputFileDataindex].PopLocation.x)*180/Math.PI ),inputNotesData[inputFileDataindex].PopLocation.y,inputNotesData[inputFileDataindex].PopLocation.x)
-                console.log("hogehoge,",tempNotesData[parseInt(needFixNotesIndex)], needFixNotesIndex)
+                console.log(60/this.state.BPMValue/2, needFixNotesIndex, inputNotesData[inputFileDataindex].LongNotesTime, parseInt( Math.round( Math.atan(inputNotesData[inputFileDataindex].PopLocation.y/inputNotesData[inputFileDataindex].PopLocation.x)*180/Math.PI /8.7804 ) )    )
                 //tempNotesData[needFixNotesIndex][parseInt( Math.round( Math.atan(inputNotesData[inputFileDataindex].PopLocation.y/inputNotesData[inputFileDataindex].PopLocation.x)*180/Math.PI /8.7804 ) )] = {HeightNum: 1, time: 0}
-                tempNotesData[needFixNotesIndex].splice(parseInt( Math.round( Math.atan(inputNotesData[inputFileDataindex].PopLocation.y/inputNotesData[inputFileDataindex].PopLocation.x)*180/Math.PI /8.7804 ) ), 1, {HeightNum: ( inputNotesData[inputFileDataindex].PopLocation.z/40 ), time: inputNotesData[inputFileDataindex].time } )
+                tempNotesData[needFixNotesIndex].splice(parseInt( Math.round( Math.atan(inputNotesData[inputFileDataindex].PopLocation.y/inputNotesData[inputFileDataindex].PopLocation.x)*180/Math.PI /8.7804 ) ), 1, {HeightNum: ( inputNotesData[inputFileDataindex].PopLocation.z/40 ), time: inputNotesData[inputFileDataindex].LongNotesTime ? inputNotesData[inputFileDataindex].time+inputNotesData[inputFileDataindex].LongNotesTime : 0 } )
             }
             console.log(tempNotesData)
             this.setState({ soundScore: tempNotesData })

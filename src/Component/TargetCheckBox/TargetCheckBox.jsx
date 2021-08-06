@@ -8,8 +8,8 @@ class TargetCheckBox extends Component {
         this.state = {
             heightNumber: props.value,
             isChecked: Boolean(props.value),
-            isLongNotes: false,
-            forTimeLongnotes: 0
+            isLongNotes: Boolean(props.longNotesVal),
+            forTimeLongnotes: props.longNotesVal
         }
     }
     onToggle_Checkbox = val => console.log(val)
@@ -44,8 +44,16 @@ class TargetCheckBox extends Component {
         this.props.onChange(this.props.number, 0)
         this.setState({ isChecked: false, isLongNotes: false, forTimeLongnotes: 0 })
     }
+    componentDidMount() {
+        this.setState({
+            heightNumber: this.props.value,
+            isChecked: Boolean(this.props.value),
+            isLongNotes: Boolean(this.props.longNotesVal),
+            forTimeLongnotes: this.props.longNotesVal
+        })
+    }
     render() {
-        console.log("=========",this.props.value)
+        console.log("=========",this.props.longNotesVal)
         return (
             <td data-tip={this.state.forTimeLongnotes?(this.state.forTimeLongnotes+" 秒まで"):null} onClick={this.onLeftClick_Box} onContextMenu={this.onRightClick_Box} className="TargetCheckBox" >
                 {this.state.isChecked && <div className="TargetCheckBox__Point" style={{backgroundColor: this.state.isLongNotes?"#daa4a4":"#c0c0c0"}}>{this.state.heightNumber}</div>}
