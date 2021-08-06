@@ -45,6 +45,7 @@ class TargetCheckBox extends Component {
         this.setState({ isChecked: false, isLongNotes: false, forTimeLongnotes: 0 })
     }
     render() {
+        console.log("=========",this.props.value)
         return (
             <td data-tip={this.state.forTimeLongnotes?(this.state.forTimeLongnotes+" 秒まで"):null} onClick={this.onLeftClick_Box} onContextMenu={this.onRightClick_Box} className="TargetCheckBox" >
                 {this.state.isChecked && <div className="TargetCheckBox__Point" style={{backgroundColor: this.state.isLongNotes?"#daa4a4":"#c0c0c0"}}>{this.state.heightNumber}</div>}
