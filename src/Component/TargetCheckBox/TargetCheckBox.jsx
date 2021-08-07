@@ -51,11 +51,21 @@ class TargetCheckBox extends Component {
             isLongNotes: Boolean(this.props.longNotesVal),
             forTimeLongnotes: this.props.longNotesVal
         })
+        /*
+        console.log(this.props.value,{
+            heightNumber: this.props.value,
+            isChecked: Boolean(this.props.value),
+            isLongNotes: Boolean(this.props.longNotesVal),
+            forTimeLongnotes: this.props.longNotesVal
+        })
+        */
     }
+    
     render() {
+        if(this.props.value) console.log(this.props.value)
         return (
             <td data-tip={this.state.forTimeLongnotes?(this.state.forTimeLongnotes+" 秒まで"):null} onClick={this.onLeftClick_Box} onContextMenu={this.onRightClick_Box} className="TargetCheckBox" >
-                {this.state.isChecked && <div className="TargetCheckBox__Point" style={{backgroundColor: this.state.isLongNotes?"#daa4a4":"#c0c0c0"}}>{this.state.heightNumber}</div>}
+                {Boolean(this.props.value) && <div className="TargetCheckBox__Point" style={{backgroundColor: this.state.isLongNotes?"#daa4a4":"#c0c0c0"}}>{this.props.value}</div>}
                 {this.state.isLongNotes ? <ReactTooltip effect="float" type="info" place="right" />: null}
             </td>
         )

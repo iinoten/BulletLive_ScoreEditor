@@ -109,7 +109,6 @@ class BaseRoot extends Component {
         this.state.soundScore.forEach((stepData,stepIndex) => {
             console.log("array data;",stepData,stepIndex)
             stepData.forEach((columnData,columnIndex) => {
-                console.log(columnData,columnIndex)
                 if (columnData.HeightNum) {
                     console.log("hogehoge",(19-columnIndex)*-8.8 )
                     download_score_data.push({
@@ -130,12 +129,12 @@ class BaseRoot extends Component {
         
         console.log({result: download_score_data})
         const fileName = 'finename.json';
-        const data = new Blob([JSON.stringify({
+        const data = new Blob([JSON.stringify([{
             Name: this.state.titleValue,
             Notes: download_score_data,
             BPM: this.state.BPMValue,
             MarginTime: this.state.delayTime
-        })], { type: 'text/json' });
+        }])], { type: 'text/json' });
         const jsonURL = window.URL.createObjectURL(data);
         const link = document.createElement('a');
         document.body.appendChild(link);
@@ -160,17 +159,19 @@ class BaseRoot extends Component {
             let tempNotesData = new Array() 
             for (let index = 0; index < ( Math.round((inputNotesData.slice(-1)[0].time - inputData.MarginTime )/(60/this.state.BPMValue/2))+1 ); index++) {
                 tempNotesData.push([{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0}, {HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0}, {HeightNum: 0, time: 0}, {HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0}, {HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},])
-                console.log(tempNotesData)
+                console.log("ノーツのチェックボックス達を初期化しています")
             }
 
             for (let inputFileDataindex = 0; inputFileDataindex < inputNotesData.length; inputFileDataindex++) {
                 const needFixNotesIndex = Math.round((inputNotesData[inputFileDataindex].time - inputData.MarginTime )/(60/this.state.BPMValue/2))
-                console.log(60/this.state.BPMValue/2, needFixNotesIndex, inputNotesData[inputFileDataindex].LongNotesTime, parseInt( Math.round( Math.atan(inputNotesData[inputFileDataindex].PopLocation.y/inputNotesData[inputFileDataindex].PopLocation.x)*180/Math.PI /8.7804 ) )    )
-                //tempNotesData[needFixNotesIndex][parseInt( Math.round( Math.atan(inputNotesData[inputFileDataindex].PopLocation.y/inputNotesData[inputFileDataindex].PopLocation.x)*180/Math.PI /8.7804 ) )] = {HeightNum: 1, time: 0}
-                tempNotesData[needFixNotesIndex].splice(parseInt( Math.round( Math.atan(inputNotesData[inputFileDataindex].PopLocation.y/inputNotesData[inputFileDataindex].PopLocation.x)*180/Math.PI /8.7804 ) ), 1, {HeightNum: ( inputNotesData[inputFileDataindex].PopLocation.z/40 ), time: inputNotesData[inputFileDataindex].LongNotesTime ? inputNotesData[inputFileDataindex].time+inputNotesData[inputFileDataindex].LongNotesTime : 0 } )
+                console.log(60/this.state.BPMValue/2, needFixNotesIndex, inputNotesData[inputFileDataindex].LongNotesTime, Math.round( Math.atan(inputNotesData[inputFileDataindex].PopLocation.Y/inputNotesData[inputFileDataindex].PopLocation.X)*180/Math.PI /8.7804 ) )
+                tempNotesData[needFixNotesIndex].splice(Math.round( Math.atan(inputNotesData[inputFileDataindex].PopLocation.Y/inputNotesData[inputFileDataindex].PopLocation.X)*180/Math.PI /8.7804 ) , 1, {HeightNum: Math.round( inputNotesData[inputFileDataindex].PopLocation.Z/40 ), time: inputNotesData[inputFileDataindex].LongNotesTime ? inputNotesData[inputFileDataindex].time+inputNotesData[inputFileDataindex].LongNotesTime : 0 } )
+                console.log("ノーツデータを読み込んでいます")
+                console.log(Math.round( inputNotesData[inputFileDataindex].PopLocation.Z/40 ),`Math.round( ${inputNotesData[inputFileDataindex].PopLocation.Z}/40 )`)
             }
             console.log(tempNotesData)
             this.setState({ soundScore: tempNotesData })
+            alert("ファイル読み込みが完了しました")
         };
     }
 
