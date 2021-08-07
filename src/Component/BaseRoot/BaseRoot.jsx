@@ -152,10 +152,11 @@ class BaseRoot extends Component {
         const fileReader = new FileReader();
         fileReader.readAsText(e.target.files[0], "UTF-8");
         fileReader.onload = e => {
-            const inputData = JSON.parse(e.target.result)
-            console.log("e.target.result", JSON.parse(e.target.result));
+            const inputData = JSON.parse(e.target.result)[0]
+            console.log("e.target.result", inputData);
             this.setState({ BPMValue: inputData.BPM, titleValue: inputData.Name, delayTime: inputData.MarginTime })
             let inputNotesData = inputData.Notes;
+            console.log(inputNotesData)
             let tempNotesData = new Array() 
             for (let index = 0; index < ( Math.round((inputNotesData.slice(-1)[0].time - inputData.MarginTime )/(60/this.state.BPMValue/2))+1 ); index++) {
                 tempNotesData.push([{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0}, {HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0}, {HeightNum: 0, time: 0}, {HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0}, {HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},{HeightNum: 0, time: 0},])

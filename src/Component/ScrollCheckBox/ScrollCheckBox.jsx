@@ -4,7 +4,6 @@ import TargetCheckBox from '../TargetCheckBox/TargetCheckBox';
 
 class ScrollCheckBox extends Component {
     render() {
-        console.log(this.props.value)
         return (
             <tr className="ScrollCheckBox">
                 <div style={{fontSize: "0.8em"}}>{this.props.time}sec</div>
